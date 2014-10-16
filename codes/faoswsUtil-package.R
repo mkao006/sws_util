@@ -1,7 +1,7 @@
 ##' This package provides extra functionality to the faosws package
 ##' for the manipulation of data.
 ##'
-##' @name faoswsExtra-package
+##' @name faoswsEUtil-package
 ##' @docType package
 ##' @title A suite of function to support the manipulation of data for
 ##' working with the FAO new statistical working system.
@@ -10,5 +10,6 @@
 ##' @keywords package
 ##' 
 ##' @import data.table
+##' @import faoswsFlag
 ##' 
 NULL
