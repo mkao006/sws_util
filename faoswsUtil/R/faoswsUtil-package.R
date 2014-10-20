@@ -1,7 +1,7 @@
 ##' This package provides extra functionality to the faosws package
 ##' for the manipulation of data.
 ##'
-##' @name faoswsEUtil-package
+##' @name faoswsUtil-package
 ##' @docType package
 ##' @title A suite of function to support the manipulation of data for
 ##' working with the FAO new statistical working system.
