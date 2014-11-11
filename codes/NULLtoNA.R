@@ -17,7 +17,8 @@ NULLtoNA = function(nullList){
                               )
                        )
                )
-    vector = vector(mode = listType, length = length(nullList))
+    vector = as.vector(rep(NA, length = length(nullList)),
+        mode = listType)
     validEntry = which(sapply(nullList, FUN = function(x) !is.null(x)))
     vector[validEntry] =
         unlist(nullList[validEntry])
