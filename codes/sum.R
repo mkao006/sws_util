@@ -9,6 +9,6 @@
 ##' @export
 ##' 
 
-sum = function(x){
-    base::sum(x, na.rm = !all(is.na(x)))
+sum = function(x, ...){
+    base::sum(x, na.rm = !all(is.na(x)), ...)
 }
