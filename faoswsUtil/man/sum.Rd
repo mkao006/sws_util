@@ -3,7 +3,7 @@
 \alias{sum}
 \title{This is a wrapper for the normal sum function.}
 \usage{
-sum(..., na.rm = !all(is.na(x)))
+sum(x, na.rm = !all(is.na(x)))
 }
 \arguments{
 \item{...}{The vector to be summed, see the base::sum function.}
