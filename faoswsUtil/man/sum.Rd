@@ -3,13 +3,17 @@
 \alias{sum}
 \title{This is a wrapper for the normal sum function.}
 \usage{
-sum(x)
+sum(..., na.rm = !all(is.na(x)))
 }
 \arguments{
-\item{x}{The vector to be summed.}
+\item{...}{The vector to be summed, see the base::sum function.}
+
+\item{na.rm}{Same as base::sum}
 }
 \description{
 The function sums a vector with missing values, but when the whole
-vector is missing it returns NA rather than zero.
+vector is missing it returns NA rather than zero. This function is
+merely provided so that it does not return unexpected result for
+users.x
 }
 

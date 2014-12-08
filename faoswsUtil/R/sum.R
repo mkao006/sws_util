@@ -2,13 +2,16 @@
 ##'
 ##'
 ##' The function sums a vector with missing values, but when the whole
-##' vector is missing it returns NA rather than zero.
+##' vector is missing it returns NA rather than zero. This function is
+##' merely provided so that it does not return unexpected result for
+##' users.x
 ##'
-##' @param x The vector to be summed.
+##' @param ... The vector to be summed, see the base::sum function.
+##' @param na.rm Same as base::sum
 ##'
 ##' @export
 ##' 
 
-sum = function(x){
-    base::sum(x, na.rm = !all(is.na(x)))
+sum = function(..., na.rm = !all(is.na(x))){
+    base::sum(..., na.rm = na.rm)
 }
