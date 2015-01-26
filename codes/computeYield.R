@@ -37,13 +37,19 @@ computeYield = function(productionValue, productionObservationFlag,
                  "areaHarvestedValue", "areaHarvestedObservationFlag",
                  "yieldValue", "yieldObservationFlag", "yieldMethodFlag"))
 
-    data[, yieldValue :=
+    ## Balance yield values only when they're missing
+    missingYield = is.na(data[, yieldValue]) |
+        data[, yieldObservationFlag] == "M"
+    data[missingYield, yieldValue :=
          computeRatio(productionValue, areaHarvestedValue) * unitConversion]
-    data[, yieldObservationFlag :=
+    data[missingYield, yieldObservationFlag :=
          aggregateObservationFlag(productionObservationFlag,
                                   areaHarvestedObservationFlag,
                                   flagTable = flagTable)]
-    data[, yieldMethodFlag := newMethodFlag]
+    data[missingYield, yieldMethodFlag := newMethodFlag]
+    ## If yieldValue is still NA, make sure observation flag is "M".  Note:
+    ## this can happen by taking 0 production / 0 area.
+    data[is.na(yieldValue), yieldObservationFlag := "M"]
 
     setnames(x = data,
              old = c("productionValue", "productionObservationFlag",
