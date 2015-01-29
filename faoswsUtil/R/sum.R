@@ -6,7 +6,7 @@
 ##' merely provided so that it does not return unexpected result for
 ##' users.x
 ##'
-##' @param ... The vector to be summed, see the base::sum function.
+##' @param x The vector to be summed, see the base::sum function.
 ##' @param na.rm Same as base::sum
 ##'
 ##' @export

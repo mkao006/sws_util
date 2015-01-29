@@ -11,16 +11,22 @@
 ##' @param yieldValue The columne name corresponding to yield value.
 ##' @param yieldObservationFlag The column name corresponding to the
 ##' observation flag of yield.
-##' @param flagTable see data(faoswsFlagTable) in \pkg{faoswsFlag}
+##' @param yieldMethodFlag The column name corresponding to the method flag for
+##' yield.
+##' @param newMethodFlag The character value that should be placed in the
+##' yieldMethodFlag column when yield is computed.
+##' @param flagTable see \code{\link[faoswsFlag]{faoswsFlagTable}}.
 ##' @param data The data.table object containing the data.
+##' @param unitConversion yield is computed as (production)/(area harvested)*
+##' (unit conversion).
 ##'
 ##' @export
-
+##' 
 
 computeYield = function(productionValue, productionObservationFlag,
     areaHarvestedValue, areaHarvestedObservationFlag, yieldValue,
     yieldObservationFlag, yieldMethodFlag, newMethodFlag,
-    flagTable = faoswsFlagTable, data, unitConversion = 1){
+    flagTable = faoswsFlag::faoswsFlagTable, data, unitConversion = 1){
 
     if(!yieldValue %in% colnames(data))
         data[, c(yieldValue) := NA]
