@@ -3,8 +3,8 @@
 ##' This is a function to compute yield based on production and area
 ##' harvested.
 ##'
-##' @param production The value of production
-##' @param areaHarvested The value of area harvested.
+##' @param numerator The value of the numerator.
+##' @param denominator The value of the denominator.
 ##'
 ##' @export
 ##'
