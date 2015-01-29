@@ -11,16 +11,22 @@
 ##' @param yieldValue The columne name corresponding to yield value.
 ##' @param yieldObservationFlag The column name corresponding to the
 ##' observation flag of yield.
-##' @param flagTable see data(faoswsFlagTable) in \pkg{faoswsFlag}
+##' @param yieldMethodFlag The column name corresponding to the method flag for
+##' yield.
+##' @param newMethodFlag The character value that should be placed in the
+##' yieldMethodFlag column when yield is computed.
+##' @param flagTable see \code{\link[faoswsFlag]{faoswsFlagTable}}.
 ##' @param data The data.table object containing the data.
+##' @param unitConversion yield is computed as (production)/(area harvested)*
+##' (unit conversion).
 ##'
 ##' @export
-
+##' 
 
 computeYield = function(productionValue, productionObservationFlag,
     areaHarvestedValue, areaHarvestedObservationFlag, yieldValue,
     yieldObservationFlag, yieldMethodFlag, newMethodFlag,
-    flagTable = faoswsFlagTable, data, unitConversion = 1){
+    flagTable = faoswsFlag::faoswsFlagTable, data, unitConversion = 1){
 
     if(!yieldValue %in% colnames(data))
         data[, c(yieldValue) := NA]
@@ -37,19 +43,13 @@ computeYield = function(productionValue, productionObservationFlag,
                  "areaHarvestedValue", "areaHarvestedObservationFlag",
                  "yieldValue", "yieldObservationFlag", "yieldMethodFlag"))
 
-    ## Balance yield values only when they're missing
-    missingYield = is.na(data[, yieldValue]) |
-        data[, yieldObservationFlag] == "M"
-    data[missingYield, yieldValue :=
+    data[, yieldValue :=
          computeRatio(productionValue, areaHarvestedValue) * unitConversion]
-    data[missingYield, yieldObservationFlag :=
+    data[, yieldObservationFlag :=
          aggregateObservationFlag(productionObservationFlag,
                                   areaHarvestedObservationFlag,
                                   flagTable = flagTable)]
-    data[missingYield, yieldMethodFlag := newMethodFlag]
-    ## If yieldValue is still NA, make sure observation flag is "M".  Note:
-    ## this can happen by taking 0 production / 0 area.
-    data[is.na(yieldValue), yieldObservationFlag := "M"]
+    data[, yieldMethodFlag := newMethodFlag]
 
     setnames(x = data,
              old = c("productionValue", "productionObservationFlag",
