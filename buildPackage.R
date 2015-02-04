@@ -1,6 +1,8 @@
 ## Building the package
 ## ---------------------------------------------------------------------
 
+# setwd("~/Documents/Github/sws_util/") #Josh's directory
+
 library(roxygen2)
 
 ## Remove the folder if it exists
