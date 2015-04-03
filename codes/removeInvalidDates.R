@@ -39,6 +39,8 @@ removeInvalidDates = function(data, context = swsContext.datasets[[1]]){
     areaValidRange[, startDate := cleanDates(startDate)]
     areaValidRange[, endDate := cleanDates(endDate)]
     setnames(areaValidRange, old = "code", new = "geographicAreaM49")
+    areaValidRange = areaValidRange[, c("geographicAreaM49", "startDate",
+                                        "endDate"), with = FALSE]
     data = merge(data, areaValidRange, by = "geographicAreaM49", all.x = TRUE)
     data[, date := as.Date(paste0(data$timePointYears, "-01-01",
                                   format = "%Y-%m-%d"))]
