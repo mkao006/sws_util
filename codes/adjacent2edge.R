@@ -16,6 +16,7 @@ adjacent2edge = function(tree){
     
     ## Data Quality Checks
     stopifnot(is(tree, "data.table"))
+    stopifnot(sapply(tree, class) == c("character", "character"))
     
     children = strsplit(unlist(tree[, 2, with = FALSE]), ", ")
     data.table(parent = rep(unlist(tree[, 1, with = FALSE]),
